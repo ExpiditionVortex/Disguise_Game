@@ -16,8 +16,8 @@ public class PlayerController : MonoBehaviour
     public GameObject playerStandard;
     public GameObject reflector;
 
-    public Rigidbody2D rbStandard;
-    public Rigidbody2D rbReflector;
+    public Rigidbody rbStandard;
+    public Rigidbody rbReflector;
     public float speedStandard;
     public float speedReflector;
     public float rotSpeed;
@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
         {
             reflector = potentialReflector;
             reflector.transform.parent = gameObject.transform;
-            rbReflector = reflector.GetComponent<Rigidbody2D>();
+            rbReflector = reflector.GetComponent<Rigidbody>();
 
 
             playerStandard.SetActive(false);
@@ -129,7 +129,7 @@ public class PlayerController : MonoBehaviour
         reflectorMode = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 8)
         {
@@ -137,9 +137,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit(Collider other)
     {
-        if (collision.gameObject.Equals(potentialReflector))
+        if (other.gameObject.Equals(potentialReflector))
         {
             potentialReflector = null;
         }
